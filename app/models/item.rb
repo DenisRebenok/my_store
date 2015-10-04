@@ -1,15 +1,11 @@
 class Item < ActiveRecord::Base
-  # attr_accessible :price, :name, :real, :weight, :description
 
   validates :price, numericality: { greater_than: 0 , allow_nil: true }
-  validates :name, :description, presence: true
+  validates :name, presence: true
 
-  belongs_to :category
+  has_and_belongs_to_many :carts
+  has_many                         :positions
+  has_many :carts, through: :positions
 
-  after_initialize { } # Item.new; Item.first
-  after_save       { } # Item.save; Item.create; item.update_attributes()
-  after_create     { category.inc(:items_count, 1) }
-  after_update     { }
-  after_destroy    { category.inc(:items_count, -1) } #item.destroy
-
+  has_many :comments, as: :commentable
 end
