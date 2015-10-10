@@ -8,7 +8,18 @@
 </head>
 <body>
 
-<%= yield %>
+    <div class="sessionInfo">
+      <% if current_user %>
+          Вы залогинены как <%= link_to(current_user.login, edit_user_registration_path) %> | <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+      <% else %>
+          <%= link_to "Sign in", new_user_session_path %> | <%= link_to "Registration", new_user_registration_path %>
+      <% end %>
+    </div>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <%= yield %>
 
 </body>
 </html>
