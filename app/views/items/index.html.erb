@@ -18,8 +18,13 @@
     <td><%= i.id %></td>
     <td><%= link_to i.name, item_path(i) %></p></td>
     <td><%= i.price %></td>
-    <td><%= link_to "Delete", i , method: :delete, data: { confirm: "Точно удалить?" } %></td>
-    <td>Рейтинг: <%= i.votes_count %>, <%= link_to "+", upvote_item_path(i) %></td>
+
+    <% if user_signed_in? %>
+        <td><%= link_to "Delete", i , method: :delete, data: { confirm: "Точно удалить?" } %></td>
+        <td>Рейтинг: <%= i.votes_count %>, <%= link_to "+", upvote_item_path(i) %></td>
+    <% else %>
+        <td>Рейтинг: <%= i.votes_count %>
+    <% end %>
   </tr>
 
 <% end %>
