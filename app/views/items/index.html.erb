@@ -6,8 +6,9 @@
         <th>Item id</th>
         <th>Name</th>
         <th>Price</th>
+        <th>created_at</th>
         <th></th>
-        <th></th>
+        <th>Рейтинг</th>
     </tr>
 </thead>
 <tbody>
@@ -16,13 +17,17 @@
 
   <tr>
     <td><%= i.id %></td>
-    <td><%= link_to i.name, item_path(i) %></p></td>
+    <td>
+      <%= link_to i.name, item_path(i) %>
+    </td>
     <td><%= i.price %></td>
+    <td><%= i.created_at %></td>
 
     <% if user_signed_in? %>
         <td><%= link_to "Delete", i , method: :delete, data: { confirm: "Точно удалить?" } %></td>
         <td>Рейтинг: <%= i.votes_count %>, <%= link_to "+", upvote_item_path(i) %></td>
     <% else %>
+        <td></td>
         <td>Рейтинг: <%= i.votes_count %>
     <% end %>
   </tr>

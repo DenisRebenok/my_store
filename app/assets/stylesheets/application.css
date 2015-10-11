@@ -13,3 +13,5 @@
  *= require_tree .
  *= require_self
  */
+
+.email { font-size: 80%; color: #555; margin: 1em }

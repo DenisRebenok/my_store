@@ -1,10 +1,14 @@
 class ItemsController < ApplicationController
 
-  before_action :find_item, only: [:show, :edit, :update, :destroy, :upvote]
+  before_action :find_item, only: [:show, :edit, :update, :destroy, :upvote, :crop_image]
   before_action :check_if_admin, only: [:edit, :update, :new, :create, :destroy]
 
   def index
-    @items = Item.all
+    @items = Item
+    @items = @items.where("price >= ?", params[:price_from])       if params[:price_from]
+    @items = @items.where("created_at >= ?", 0.day.ago)            if params[:today]
+    @items = @items.where("votes_count >= ?", params[:votes_from]) if params[:votes_from]
+    @items = @items.order("votes_count DESC", "price DESC")
   end
 
   def expensive
@@ -30,7 +34,7 @@ class ItemsController < ApplicationController
     item_params = params.require(:item).permit(:name, :description, :price, :weight, :real)
     @item = Item.create(item_params)
     if @item.errors.empty?
-      redirect_to item_path(@item)
+      redirect_to crop_image_item_path(@item)
     else
       render "new"
     end
@@ -38,10 +42,10 @@ class ItemsController < ApplicationController
 
   # /items/1 PUT
   def update
-    item_params = params.require(:item).permit(:name, :description, :price, :weight, :real)
+    item_params = params.require(:item).permit(:name, :description, :price, :weight, :real, :image)
     @item.update_attributes(item_params)
     if @item.errors.empty?
-      redirect_to item_path(@item)
+      redirect_to crop_image_item_path(@item)
     else
       render "edit"
     end
@@ -55,6 +59,13 @@ class ItemsController < ApplicationController
   def upvote
     @item.increment!(:votes_count)
     redirect_to action: :index
+  end
+
+  def crop_image
+    if request.put?
+      @item.crop_image!(params[:item][:image_crop_data])
+      redirect_to item_path(@item)
+    end
   end
 
   private
