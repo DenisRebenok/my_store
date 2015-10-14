@@ -16,6 +16,8 @@ gem 'simple_form', git: 'git://github.com/plataformatec/simple_form'
 gem 'bootstrap-sass'
 gem 'sass-rails'
 
+gem 'exception_notification'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
