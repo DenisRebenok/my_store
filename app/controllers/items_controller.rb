@@ -8,7 +8,8 @@ class ItemsController < ApplicationController
     @items = @items.where("price >= ?", params[:price_from])       if params[:price_from]
     @items = @items.where("created_at >= ?", 0.day.ago)            if params[:today]
     @items = @items.where("votes_count >= ?", params[:votes_from]) if params[:votes_from]
-    @items = @items.order("votes_count DESC", "price DESC")
+    @items = @items.order("votes_count DESC", "price")
+    # @items = @items.includes(:image)
   end
 
   def expensive
@@ -31,7 +32,6 @@ class ItemsController < ApplicationController
 
   # /items POST
   def create
-    item_params = params.require(:item).permit(:name, :description, :price, :weight, :real)
     @item = Item.create(item_params)
     if @item.errors.empty?
       redirect_to crop_image_item_path(@item)
@@ -42,11 +42,12 @@ class ItemsController < ApplicationController
 
   # /items/1 PUT
   def update
-    item_params = params.require(:item).permit(:name, :description, :price, :weight, :real, :image)
     @item.update_attributes(item_params)
     if @item.errors.empty?
+      flash[:success] = "Item successfully updated!"
       redirect_to crop_image_item_path(@item)
     else
+      flash.now[:error] = "You made mistakes in your form! Please correct them."
       render "edit"
     end
   end
@@ -75,5 +76,8 @@ class ItemsController < ApplicationController
     render_404 unless @item
   end
 
- 
+  def item_params
+    params.require(:item).permit(:name, :description, :price, :weight, :real, :image)
+  end
+
 end

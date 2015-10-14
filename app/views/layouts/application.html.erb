@@ -8,6 +8,9 @@
 </head>
 <body>
 
+    <%=	 render partial: "shared/navbar" %>
+
+
     <div class="sessionInfo">
       <% if current_user %>
           Вы залогинены как <%= link_to(current_user.login, edit_user_registration_path) %> | <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
@@ -15,6 +18,9 @@
           <%= link_to "Sign in", new_user_session_path %> | <%= link_to "Registration", new_user_registration_path %>
       <% end %>
     </div>
+
+    <p style="color: red;"><%= flash[:error] %></p>
+    <p style="color: green;"><%= flash[:success] %></p>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

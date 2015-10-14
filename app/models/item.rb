@@ -3,7 +3,7 @@ class Item < ActiveRecord::Base
   attr_reader :image_crop_data
 
   validates :price, numericality: { greater_than: 0 , allow_nil: true }
-  validates :name, presence: true
+  validates :name, :price, presence: true
 
   has_and_belongs_to_many :carts
   has_many                :positions

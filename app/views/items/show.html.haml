@@ -1,0 +1,12 @@
+%h1= @item.name
+
+%p= image_tag @item.image.normal
+
+%ul
+  %li #{@item.price} $
+  %li= urls_to_links(urls_to_images(@item.description))
+  %li
+    = t("item.weight")
+    = @item.weight
+    кг.
+
