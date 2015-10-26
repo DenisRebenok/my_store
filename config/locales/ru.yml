@@ -1,0 +1,16 @@
+
+ru:
+  item:
+    weight: 'Вес'
+
+  activerecord:
+    models:
+      item: 'Товар'
+    attributes:
+      item:
+        price: 'Цена'
+        name: 'Название'
+        description: 'Описание'
+        weight: 'Вес'
+        image: 'Изображение'
+

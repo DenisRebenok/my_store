@@ -9,7 +9,6 @@ class ItemsController < ApplicationController
     @items = @items.where("created_at >= ?", 0.day.ago)            if params[:today]
     @items = @items.where("votes_count >= ?", params[:votes_from]) if params[:votes_from]
     @items = @items.order("votes_count DESC", "price")
-    # @items = @items.includes(:image)
   end
 
   def expensive
@@ -54,7 +53,8 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to action: "index"
+    render json: { success: true }
+    ItemsMailer.item_destroyed(@item).deliver
   end
 
   def upvote
