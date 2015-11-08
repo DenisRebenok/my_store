@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+    = display_meta_tags(site: "MyStore", title: page_title, reverse: true, description: @page_description, keywords: @page_keywords)
+
+  %body
+
+    .sessionInfo
+      - if current_user
+        = link_to(current_user.login, edit_user_registration_path) 
+        | #{link_to "Sign out", destroy_user_session_path, :method => :delete}
+      - else
+        = link_to "Sign in", new_user_session_path 
+        | #{link_to "Registration", new_user_registration_path}
+
+    - if flash[:error]
+      .flash.error= flash[:error]
+    - if flash[:success]
+      .flash.success= flash[:success]
+
+    = yield
+
+    = render partial: "shared/email"

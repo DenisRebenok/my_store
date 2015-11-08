@@ -18,6 +18,8 @@ gem 'sass-rails'
 
 gem 'exception_notification'
 
+gem 'meta-tags'
+
 gem 'mina'
 
 # Use Uglifier as compressor for JavaScript assets
