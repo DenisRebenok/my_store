@@ -123,6 +123,7 @@ GEM
       rake
     mini_portile (0.6.2)
     minitest (5.8.1)
+    mmmenu (0.5.2)
     multi_json (1.11.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -231,6 +232,7 @@ DEPENDENCIES
   jquery-rails
   meta-tags
   mina
+  mmmenu
   pg
   rails (~> 4.2.4)
   rmagick

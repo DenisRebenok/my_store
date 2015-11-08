@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     put :crop_image, on: :member
   end
 
+  resource :cart
+
   get "admin/users_count" => "admin#users_count"
 
 end

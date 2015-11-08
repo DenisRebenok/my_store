@@ -22,6 +22,8 @@
     - if flash[:success]
       .flash.success= flash[:success]
 
+    = build_mmmenu(@menu)
+
     = yield
 
     = render partial: "shared/email"

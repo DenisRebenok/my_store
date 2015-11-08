@@ -21,6 +21,7 @@ gem 'exception_notification'
 gem 'meta-tags'
 
 gem 'mina'
+gem 'mmmenu'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
