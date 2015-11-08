@@ -18,6 +18,8 @@ gem 'sass-rails'
 
 gem 'exception_notification'
 
+gem 'mina'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
@@ -58,5 +60,9 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+end
+
+group :production do
+  gem 'pg'
 end
 
