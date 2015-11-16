@@ -1,9 +1,9 @@
 %h1= @page_title = @item.name
 
-%p= image_tag @item.image.normal
+%p= image_tag @item.image.normal unless @item.image.blank?
 
 %ul
-  %li #{@item.price} $
+  %li= "#{@item.price} $"
   %li= urls_to_links(urls_to_images(@item.description))
   %li
     = t("item.weight")

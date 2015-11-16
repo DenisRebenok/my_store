@@ -22,10 +22,18 @@ gem 'meta-tags'
 
 gem 'mina'
 gem 'mmmenu'
+gem "dalli"
+
+
+gem 'acts-as-taggable-on', '~> 3.4'
+
+
+# gem "will_paginate"
+gem "kaminari"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
-# Use CoffeeScript for .coffee assets and views
+
 gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
